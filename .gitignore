@@ -1,0 +1,11 @@
+# Ignore all
+/*
+
+# Include git files
+!.gitignore
+
+# Include cargo files
+!Cargo.toml
+
+# Source code
+!src/
