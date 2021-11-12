@@ -77,7 +77,7 @@ impl<Alive> Strain<Alive> {
         }
         (0..self.start).for_each(|_| mask.push(f(None)));
         //let bound = bound - self.start;
-        if (self.head - self.start) <= self.len - 1 {
+        if (self.head - self.start) < self.len {
             (0..=(self.head - self.start)).for_each(|i| {
                 mask.push(f(Some(
                     (self.head - self.start) - i + (self.orig_len - self.len),
@@ -103,23 +103,17 @@ impl<Alive> Strain<Alive> {
             _p: PhantomData::default(),
         }
     }
-
-    // This function can be greatly improved.
-    pub(crate) fn bump_bound(self, bound: u16) -> Result<Strain<Alive>, Strain<Dead>> {
-        let mut cloned = self.clone();
-        Ok(cloned.tick(bound).map(|_| self)?)
-    }
 }
 
 impl<Alive> Clone for Strain<Alive> {
     fn clone(&self) -> Self {
         Self {
-            head: self.head.clone(),
-            len: self.len.clone(),
-            orig_len: self.orig_len.clone(),
-            start: self.start.clone(),
-            speed: self.speed.clone(),
-            _p: self._p.clone(),
+            head: self.head,
+            len: self.len,
+            orig_len: self.orig_len,
+            start: self.start,
+            speed: self.speed,
+            _p: self._p,
         }
     }
 }

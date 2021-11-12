@@ -29,7 +29,7 @@ where
             for j in 0..self.width {
                 write!(f, "{}", self.map[i as usize][j as usize])?;
             }
-            write!(f, "\n")?;
+            writeln!(f)?;
         }
         Ok(())
     }
@@ -93,15 +93,19 @@ where
             self.height = new_height;
             updated = true;
         }
-        if self.width > new_width {
-            self.strains.truncate(new_width as usize);
-            self.width = new_width;
-            updated = true;
-        } else if self.width < new_width {
-            self.strains
-                .extend((0..new_width - self.width).map(|_| None));
-            self.width = new_width;
-            updated = true;
+        match self.width {
+            w if w > new_width => {
+                self.strains.truncate(new_width as usize);
+                self.width = new_width;
+                updated = true;
+            }
+            w if w < new_width => {
+                self.strains
+                    .extend((0..new_width - self.width).map(|_| None));
+                self.width = new_width;
+                updated = true;
+            }
+            _ => (),
         }
         if updated {
             self.map = vec![vec![T::default(); new_width as usize]; new_height as usize];
