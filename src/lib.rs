@@ -5,5 +5,8 @@
 
 mod matrix;
 mod strain;
+///
+#[cfg(feature = "tui")]
+pub mod widget;
 
 pub use matrix::Matrix;

@@ -1,8 +1,9 @@
 [package]
 name = "matrix-cascade"
-description = "Matrix Cascade Widget"
+description = "Matrix Cascade"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
 rand = "0.8.4"
+tui = { version = "0.16.0", optional = true }
