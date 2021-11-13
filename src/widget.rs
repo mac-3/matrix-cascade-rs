@@ -2,12 +2,10 @@ use tui::widgets::StatefulWidget;
 
 use crate::Matrix;
 
-///
 pub struct MatrixWidget<F, T>
 where
     F: FnMut(Option<u16>) -> T,
 {
-    ///
     f: F,
 }
 
@@ -24,7 +22,6 @@ impl<F, T> MatrixWidget<F, T>
 where
     F: FnMut(Option<u16>) -> T,
 {
-    ///
     pub fn new(f: F) -> Self {
         Self { f }
     }
